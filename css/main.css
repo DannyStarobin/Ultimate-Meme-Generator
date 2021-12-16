@@ -27,12 +27,12 @@ body {
 
 button {
     cursor: pointer;
-    
+
 }
 
 input {
     cursor: pointer;
-   
+
 
 }
 
@@ -69,13 +69,14 @@ input {
 
 .filter-search-bar {
     margin-bottom: 30px;
+    /* display: none; */
 
 }
 
 .filters {
     position: relative;
     max-width: 600px;
-    
+
 }
 
 .filter-btn {
@@ -86,29 +87,29 @@ input {
     transition: 0.3s;
 }
 
-.filter-btn:hover{
+.filter-btn:hover {
     transform: scale(1.2);
     color: #ff7f00;
 }
 
 
-.more-filter-btn{
+.more-filter-btn {
     position: relative;
-    right:-40px;
+    right: -40px;
     font-size: 20px;
 }
 
-.more-filter-btn:hover{
+.more-filter-btn:hover {
     color: #ff7f00;
 }
 
 .close-filter-btn {
     position: absolute;
-    right:-40px;
+    right: -40px;
     font-size: 20px;
 }
 
-.close-filter-btn:hover{
+.close-filter-btn:hover {
     color: #ff7f00;
 }
 
@@ -122,6 +123,7 @@ input {
     padding-top: 25px;
     padding-bottom: 25px;
     background-color: #e3e3e3;
+    display: none;
 
 }
 
@@ -140,8 +142,72 @@ input {
     transition: 0.3s;
 }
 
-.gallery-img:hover{
-border:#ff7f00 solid 2px ;
+.gallery-img:hover {
+    border: #ff7f00 solid 2px;
+}
+
+
+/* EDITOR */
+.editor-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    grid-template-rows: repeat(auto-fit, 78.57px);
+    justify-items: center;
+    align-items: center;
+    background-color: #e3e3e3;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.canvas-container {
+    grid-area: 1/1/8/6;
+    
+}
+
+.text-line-space {
+    grid-area: 1/6/2/11;
+}
+.text-line{
+   width: 400px;
+   height: 30px;
+}
+
+.text-line-function-btns {
+    grid-area: 2/6/3/11;
+}
+
+.text-line-function-btns>*{
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.editting-btns-container {
+    grid-area: 3/6/5/11;
+    border: black solid 1px;
+    padding: 10px;
+}
+.editting-btns-container>*{
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.sticker-container {
+    grid-area: 5/6/7/11;
+    border: black solid 1px;
+    padding: 10px;
+}
+
+.sticker-container>*{
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.upload-share-btns {
+    grid-area: 7/6/8/11;
+}
+.upload-share-btns>*{
+    padding: 10px;
+    margin: 0 10px;
 }
 
 /* HELPERS */
@@ -159,6 +225,7 @@ border:#ff7f00 solid 2px ;
 
 .flex.align-center {
     align-items: center;
+    
 }
 
 /* list helpers */
