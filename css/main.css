@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+
+
+/* BASICS */
+
+/* html {
+    font-family: play, serif;
+    color: #626262;
+    line-height: 1.714;
+} */
+
+body {
+    font-size: .875rem;
+
+}
+
+/* LAYOUT */
+.main-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 3.1rem;
+    padding-right: 3.1rem;
+}
+
+button {
+    cursor: pointer;
+    
+}
+
+input {
+    cursor: pointer;
+   
+
+}
+
+
+
+
+/* HEADER */
+.main-header {
+    /* height: 66px; */
+    background-color: #ff7f00;
+    margin-bottom: 30px;
+}
+
+.main-nav a {
+    height: 66px;
+    padding: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.main-nav a:hover {
+    color: black;
+    box-shadow: inset 0px -4px 0 black;
+}
+
+.logo {
+    font-size: 1.5rem;
+}
+
+.filter-search-bar {
+    margin-bottom: 30px;
+
+}
+
+.filters {
+    position: relative;
+    max-width: 600px;
+    
+}
+
+.filter-btn {
+    margin-left: 20px;
+    border: none;
+    background-color: inherit;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.filter-btn:hover{
+    transform: scale(1.2);
+    color: #ff7f00;
+}
+
+
+.more-filter-btn{
+    position: relative;
+    right:-40px;
+    font-size: 20px;
+}
+
+.more-filter-btn:hover{
+    color: #ff7f00;
+}
+
+.close-filter-btn {
+    position: absolute;
+    right:-40px;
+    font-size: 20px;
+}
+
+.close-filter-btn:hover{
+    color: #ff7f00;
+}
+
+.filter-input {
+    width: 300px;
+}
+
+/* MAIN */
+
+.main-gallery {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: #e3e3e3;
+
+}
+
+.gallery-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
+    object-fit: cover;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery-img:hover{
+border:#ff7f00 solid 2px ;
+}
+
+/* HELPERS */
+
+
+/* flex helpers */
+
+.flex {
+    display: flex;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+/* list helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
