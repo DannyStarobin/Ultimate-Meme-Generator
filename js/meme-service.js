@@ -1,71 +1,54 @@
-var gFilter = 'all'
+
+
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: null,
     selectedLineIdx: 0,
     lines: [{
-        txt: 'I sometimes eat Falafel',
-        size: 20,
-        align: 'left',
-        color: 'red'
+        txtBoxPosFromTop: 25,
+        txtPosFromTop: 50,
+        txtPosFromLeft: 275,
+        txt: '',
+        size: 30,
+        align: 'center',
+        color: 'black',
+        rectColor: 'black',
+        isFocused:'false'
 
     }
     ]
 }
 
-var gKeywordSearchCountMap = {
-    'Funny': 1, 'Cat': 4, 'Baby': 2,
-    'Politicians': 0, 'Love': 0, 'Dogs': 0,
-    'Man': 0, 'Sleep': 0, "Hate": 0,
-    'Celebrities': 0, 'Cartoon': 0, 'Serious': 0,
-    'Israeli': 0, 'You': 0
+function createLine(){
+const pos =getPosFromTop()
+const txtPos= pos +25
+    const line = {
+        txtBoxPosFromTop: pos,
+        txtPosFromTop: txtPos,
+        txtPosFromLeft: 275,
+        txt: '',
+        size: 30,
+        align: 'center',
+        color: 'black',
+        rectColor: 'black',
+        isFocused:'false'
+    }
+    gMeme.lines.push(line)
 }
 
-var gImgs = [
-    { id: 1, url: 'img/1.jpg', keywords: ['Funny', 'Politicians', 'Man'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['Love', 'Dogs'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['Baby', 'Dogs', 'Sleep'] },
-    { id: 4, url: 'img/4.jpg', keywords: ['Sleep', 'Cat'] },
-    { id: 5, url: 'img/5.jpg', keywords: ['Funny', 'Baby'] },
-    { id: 6, url: 'img/6.jpg', keywords: ['Funny', 'Man'] },
-    { id: 7, url: 'img/7.jpg', keywords: ['Funny', 'Baby'] },
-    { id: 8, url: 'img/8.jpg', keywords: ['Funny', 'Man'] },
-    { id: 9, url: 'img/9.jpg', keywords: ['Funny', 'Baby', 'Laughing'] },
-    { id: 10, url: 'img/10.jpg', keywords: ['Funny', 'Politicians', 'Man', 'Laughing'] },
-    { id: 11, url: 'img/11.jpg', keywords: ['Funny', 'Love', 'Hate', 'Man'] },
-    { id: 12, url: 'img/12.jpg', keywords: ['Funny', 'Celebrities', 'Man', 'Israeli', 'You'] },
-    { id: 13, url: 'img/13.jpg', keywords: ['Funny', 'Celebrities', 'Man', 'You'] },
-    { id: 14, url: 'img/14.jpg', keywords: ['Serious', 'Celebrities', 'Man'] },
-    { id: 15, url: 'img/15.jpg', keywords: ['Celebrities', 'Man'] },
-    { id: 16, url: 'img/16.jpg', keywords: ['Funny', 'Celebrities', 'Man', 'Laughing'] },
-    { id: 17, url: 'img/17.jpg', keywords: ['Serious', 'Politicians', 'Man'] },
-    { id: 18, url: 'img/18.jpg', keywords: ['Funny', 'Cartoon'] },
-];
+function getPosFromTop() {
+    if (gMeme.lines.length === 0) {
+        return 25
+    } else if (gMeme.lines.length ===1) {
+        return 475
+    }else
+    return 250
+}
+
 
 function getMeme() {
-    renderMeme(gMeme)
+
+    return gMeme
 }
 
 // function setLineTxt()
 
-function getImgsForDisplay() {
-    if (gFilter === 'all') {
-        return gImgs
-    }
-    var imgs = gImgs.filter(img => {
-        return img.keywords.includes(gFilter)
-    });
-    gFilter = 'all'
-    return imgs
-}
-
-
-function getFiltersForDisplay(filterSize) {
-    var { Funny, Cat, Baby, Politicians } = gKeywordSearchCountMap
-    
-    if (filterSize === 'large') {
-        return gKeywordSearchCountMap
-    } else {
-        return { Funny, Cat, Baby, Politicians }
-    }
-
-}

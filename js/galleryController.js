@@ -7,7 +7,7 @@ function renderGallery() {
 
     const strHtmls = imgs.map(function (img) {
         return `
-        <img src=${img.url} class="gallery-img" id="${img.id}" onclick="drawImgFromlocal(id)">
+        <img src=${img.url} class="gallery-img" id="${img.id}" onclick="onImageClick(id)">
         `
     })
     document.querySelector('.gallery-grid-container').innerHTML = strHtmls.join('')
@@ -15,8 +15,6 @@ function renderGallery() {
 }
 
 function onFilterClick(filter) {
-    console.log('filter:', filter);
-
     gFilter = filter
     renderGallery()
 }

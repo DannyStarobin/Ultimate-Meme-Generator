@@ -25,7 +25,11 @@
     </header>
 
     <section class="filter-search-bar main-layout flex align-center space-between">
-        <input class="filter-input" type="search" name="" id="">
+
+        <form action="/action_page.php">
+            <input class="filter-input" type="search" placeholder="Search.." name="search">
+            <button class="filter-input-btn" type="submit">&#128269</button>
+        </form>
         <div class="filters">
         </div>
     </section>
@@ -36,36 +40,44 @@
 
 
     <div class="editor-grid-container  main-layout">
+
         <div class="canvas-container">
             <canvas id="canvas" height="550" width="550" style="border: 1px solid black"></canvas>
         </div>
-        <!-- <div class="text-line-space"><input class="text-line" type="text" name="" id="" onchange="drawText(this.value, 275,50)"></div> -->
-        <div class="text-line-space"><input class="text-line" placeholder=value onchange="drawText(this.value, 275,50)"></div>
-        <div class="text-line-function-btns">
-            <button>↑↓</button>
-            <button onclick="drawRect(25, 25)">+</button>
-            <button>u</button>
-        </div>
-        <div class="editting-btns-container">
-            <button class="edit-btn">1</button>
-            <button class="edit-btn">2</button>
-            <button class="edit-btn">3</button>
-            <button class="edit-btn">4</button>
-            <button class="edit-btn">5</button>
-            <button class="edit-btn">6</button>
-            <button class="edit-btn">7</button>
-        </div>
-        <div class="sticker-container">
-            <button class="sticker-drag1">xxx</button>
-            <button class="sticker-drag2">xxx</button>
-            <button class="sticker-drag3">xxx</button>
-            <button class="sticker-drag4">xxx</button>
-        </div>
-        <div class="upload-share-btns">
-            <button class="share-btn">share</button>
-            <button class="download-btn">download</button>
-        </div>
+        <div class="function-container">
+            <div class="text-line-space">
+                <input class="text-input" type="text" onfocus="this.value=''" placeholder="wtf?????" data-line="0"
+                    onchange="setLineTxt(this.value, this.data)">
+            </div>
 
+            <div class="text-line-function-btns">
+
+                <button onclick="onMoveUp()">⇑</button>
+                <button onclick="onMoveDown()">⇓</button>
+                <button onclick="onChangeLine()">⇑⇓</button>
+                <button onclick="onAddLine()">＋</button>
+                <button onclick="onDeleteItem()">🗑</button>
+            </div>
+            <div class="editting-btns-container">
+                <button class="edit-btn">font</button>
+                <button class="edit-btn" onclick="onFontSmall()">A-</button>
+                <button class="edit-btn" onclick="onFontLarge()">A+</button>
+                <input type="color" name="color" onchange="onChangeColor(value)">
+                <button class="edit-btn" onclick="onTextAlign('left')">⇚</button>
+                <button class="edit-btn" onclick="onTextAlign('center')">≡</button>
+                <button class="edit-btn" onclick="onTextAlign('right')">⇛</button>
+            </div>
+            <div class="sticker-container">
+                <button class="sticker-drag1">xxx</button>
+                <button class="sticker-drag2">xxx</button>
+                <button class="sticker-drag3">xxx</button>
+                <button class="sticker-drag4">xxx</button>
+            </div>
+            <div class="upload-share-btns">
+                <button class="share-btn">share</button>
+                <button class="download-btn">download</button>
+            </div>
+        </div>
     </div>
 
 

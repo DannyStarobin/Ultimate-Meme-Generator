@@ -1,4 +1,5 @@
 'use strict'
+var gFilter = 'all'
 
 var gKeywordSearchCountMap = {
     'Funny': 1, 'Cat': 4, 'Baby': 2,
