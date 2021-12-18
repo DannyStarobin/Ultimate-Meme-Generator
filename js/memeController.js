@@ -4,6 +4,14 @@ var gImg
 var gFocusedPrevColor
 var gFocusedLineNumber
 
+function loadEditor(id) {
+    gCanvas = document.querySelector('#canvas');
+    gCtx = gCanvas.getContext('2d');
+    gMeme.selectedImgId = id
+
+    
+}
+
 function renderMeme() {
     const meme = getMeme()
     var lines = meme.lines
@@ -15,9 +23,34 @@ function renderMeme() {
     })
 }
 
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gCanvas.width = elContainer.offsetWidth
+    gCanvas.height = elContainer.offsetHeight
+}
 
+// function addListeners() {
+//     addMouseListeners()
+//     addTouchListeners()
+//     window.addEventListener('resize', () => {
+//         resizeCanvas()
+//         renderCanvas()
+//     })
+// }
 
-function onChangeColor(txtColor){
+// function addMouseListeners() {
+//     gCanvas.addEventListener('mousemove', onMove)
+//     gCanvas.addEventListener('mousedown', onDown)
+//     gCanvas.addEventListener('mouseup', onUp)
+// }
+
+// function addTouchListeners() {
+//     gCanvas.addEventListener('touchmove', onMove)
+//     gCanvas.addEventListener('touchstart', onDown)
+//     gCanvas.addEventListener('touchend', onUp)
+// }
+
+function onChangeColor(txtColor) {
     gMeme.lines[gMeme.selectedLineIdx].color = `${txtColor}`
     renderMeme()
 }
@@ -30,7 +63,7 @@ function onTextAlign(align) {
     if (align === 'left') gMeme.lines[gMeme.selectedLineIdx].txtPosFromLeft = 30
     if (align === 'center') gMeme.lines[gMeme.selectedLineIdx].txtPosFromLeft = 275
 
-        renderMeme()
+    renderMeme()
 }
 
 function onFontSmall() {
@@ -124,10 +157,7 @@ function setLineTxt(txt) {
     renderMeme()
 }
 
-function onImageClick(id) {
-    gMeme.selectedImgId = id
-    drawImgFromlocal(id)
-}
+
 
 function drawImgFromlocal(id) {
     gImg = new Image()
@@ -135,6 +165,8 @@ function drawImgFromlocal(id) {
     gImg.onload = () => {
         gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
         drawRect(25, 25)
+        resizeCanvas()
+        renderMeme()
     }
 }
 

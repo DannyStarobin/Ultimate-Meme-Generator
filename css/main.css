@@ -14,8 +14,11 @@
 
 body {
     font-size: .875rem;
+    margin: 0;
+    padding: 0;
 
 }
+
 
 /* LAYOUT */
 .main-layout {
@@ -43,7 +46,7 @@ input {
 .main-header {
     /* height: 66px; */
     background-color: #ff7f00;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .main-nav a {
@@ -68,6 +71,7 @@ input {
 }
 
 .filter-search-bar {
+    margin-top: 30px;
     margin-bottom: 30px;
     /* display: none; */
 
@@ -114,7 +118,17 @@ input {
 }
 
 .filter-input {
-    width: 300px;
+    width: 260px;
+    border: none;
+    border-bottom: black solid 1px;
+}
+
+.filter-input-btn {
+    border: none;
+    background-color: none;
+    position: relative;
+    bottom: 5px;
+    right: 30px
 }
 
 /* MAIN */
@@ -123,8 +137,7 @@ input {
     padding-top: 25px;
     padding-bottom: 25px;
     background-color: #e3e3e3;
-    display: none;
-    
+
 
 }
 
@@ -134,7 +147,7 @@ input {
     grid-auto-rows: auto;
     gap: 20px;
     object-fit: cover;
-    
+
 }
 
 .gallery-img {
@@ -152,103 +165,137 @@ input {
 /* EDITOR */
 .editor-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 550px));
+    grid-auto-rows: auto;
     justify-items: center;
-    align-items: center;
+    align-items: start;
     background-color: #e3e3e3;
     padding-top: 25px;
-    padding-bottom: 25px;
-    /* display: none; */
-    
+    /* padding-bottom: 25px; */
+    box-sizing: border-box;
+
 }
 
-.canvas-container { 
+.canvas-container {
+    max-height: 550px;
+    max-width: 550px;
     grid-area: 1/1/2/2;
-    position: relative;
-    
+    margin-bottom: 25px;
+
+
 }
 
-.function-container{
+.function-container {
+    padding-bottom: 25px;
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: auto;
     justify-items: center;
-    align-items: center;
+    row-gap: 0px;
 }
-.text-line-space {
-    grid-area: 1/1/2/6;
-    align-self: start;
-}
-.text-input{
 
-   width: 375px;
-   height: 60px;
-   border-radius: 10px;
-   border: none;
+.edit-btn {
+    height: 60px;
+    width: 60px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    font-size: 25px;
+    background-color: white;
+    margin: 0 5px;
+}
+
+.edit-btn:hover {
+    background-color: #f69d43;
+}
+
+.text-line-space {
+    margin-bottom: 10px;
+}
+
+.text-input {
+    width: 375px;
 }
 
 .text-line-function-btns {
-    grid-area: 2/1/3/6;
-}
-
-.text-line-function-btns>*{
-    padding: 10px;
-    margin: 0 10px;
+    margin-bottom: 20px;
 }
 
 .editting-btns-container {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(auto, 1fr));
-    grid-template-rows: repeat(2, 78.57px);
-    grid-area: 3/1/5/6;
-    border: black solid 1px;
-    padding: 10px;
+    margin-bottom: 10px;
 }
-.editting-btns-container>*{
-    padding: 10px;
-    margin: 10px 10px;
+
+.color-font-btn-container {
+    margin-bottom: 30px;
+}
+
+.color-input-button {
+    height: 45px;
+}
+
+.edit-font-btn {
+    width: 200px;
 }
 
 .sticker-container {
-    grid-area: 5/1/7/6;
-    border: black solid 1px;
+    margin-bottom: 20px;
+
+    height: 135px;
+    width: 375px;
     padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 115px;
 }
 
-.sticker-container>*{
+.sticker-container>* {
     padding: 10px;
     margin: 0 10px;
 }
 
 .upload-share-btns {
-    grid-area: 7/1/8/6;
-}
-.upload-share-btns>*{
-    padding: 10px;
-    margin: 0 10px;
+    /* grid-area: 7/1/8/6; */
+    justify-self: end;
 }
 
-.canvas-text-box{
+.upload-share-btns>* {
+    height: 60px;
+    width: 120px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: 25px;
+}
+
+.canvas-text-box {
     position: absolute;
-    top:40px;
+    top: 40px;
     left: 75px;
-    border:black solid 1px;
+    border: black solid 1px;
     height: 50px;
     width: 400px;
     text-align: center;
 
 }
 
-.canvas-text{
-   line-height: 50px;
-   font-size: 25px;
-    
-    
+.canvas-text {
+    line-height: 50px;
+    font-size: 25px;
+}
+
+footer {
+    background-color: #ff7f00;
+    height: 80px;
 
 }
+
+.footer-txt {
+    text-align: center;
+    padding-top: 30px;
+}
+
 /* HELPERS */
 
 
@@ -264,7 +311,7 @@ input {
 
 .flex.align-center {
     align-items: center;
-    
+
 }
 
 /* list helpers */
@@ -273,4 +320,8 @@ input {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.display-none {
+    display: none;
 }

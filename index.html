@@ -16,7 +16,6 @@
         <div class="logo">MEMEGEN</div>
         <nav class="main-nav">
             <ul class="clean-list flex">
-                <li><a href="#">Editor</a></li>
                 <li><a href="#">Gallery</a></li>
                 <li><a href="#">Memes</a></li>
                 <li><a href="#">About</a></li>
@@ -39,33 +38,40 @@
     </main>
 
 
-    <div class="editor-grid-container  main-layout">
-
+    <div class="editor-grid-container display-none main-layout">
         <div class="canvas-container">
-            <canvas id="canvas" height="550" width="550" style="border: 1px solid black"></canvas>
+            <canvas id="canvas" height="550" width="550"></canvas>
         </div>
+
         <div class="function-container">
             <div class="text-line-space">
-                <input class="text-input" type="text" onfocus="this.value=''" placeholder="wtf?????" data-line="0"
+                <input class="text-input edit-btn" type="text" onfocus="this.value=''" placeholder="Text line" data-line="0"
                     onchange="setLineTxt(this.value, this.data)">
             </div>
 
             <div class="text-line-function-btns">
 
-                <button onclick="onMoveUp()">⇑</button>
-                <button onclick="onMoveDown()">⇓</button>
-                <button onclick="onChangeLine()">⇑⇓</button>
-                <button onclick="onAddLine()">＋</button>
-                <button onclick="onDeleteItem()">🗑</button>
+                <button class="edit-btn" onclick="onMoveUp()">⇑</button>
+                <button class="edit-btn" onclick="onMoveDown()">⇓</button>
+                <button class="edit-btn" onclick="onChangeLine()">⇑⇓</button>
+                <button class="edit-btn" onclick="onAddLine()">＋</button>
+                <button class="edit-btn" onclick="onDeleteItem()">🗑</button>
             </div>
             <div class="editting-btns-container">
-                <button class="edit-btn">font</button>
-                <button class="edit-btn" onclick="onFontSmall()">A-</button>
                 <button class="edit-btn" onclick="onFontLarge()">A+</button>
-                <input type="color" name="color" onchange="onChangeColor(value)">
+                <button class="edit-btn" onclick="onFontSmall()">A-</button>
                 <button class="edit-btn" onclick="onTextAlign('left')">⇚</button>
                 <button class="edit-btn" onclick="onTextAlign('center')">≡</button>
                 <button class="edit-btn" onclick="onTextAlign('right')">⇛</button>
+            </div>
+            <div class="color-font-btn-container">
+                <select class="edit-btn edit-font-btn" name="shape" id="" onchange="setShape(value)">
+                    <option value="">Impact</option>
+                    <option value="line">Line</option>
+                    <option value="rectangle">Rectangle</option>
+                </select>
+                <button class="edit-btn" onclick="onTextAlign('left')">&#120120;</button>
+                <input class="edit-btn color-input-button" type="color" name="color" onchange="onChangeColor(value)">
             </div>
             <div class="sticker-container">
                 <button class="sticker-drag1">xxx</button>
@@ -75,14 +81,16 @@
             </div>
             <div class="upload-share-btns">
                 <button class="share-btn">share</button>
-                <button class="download-btn">download</button>
+                <!-- <button class="download-btn">download</button> -->
             </div>
         </div>
     </div>
 
 
 
-    <footer> </footer>
+    <footer> 
+       <h1 class="footer-txt">MEMEGEN</h1>
+    </footer>
 
 
     <script src="js/gallery-service.js"></script>
