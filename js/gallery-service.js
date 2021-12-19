@@ -31,14 +31,14 @@ var gImgs = [
 ];
 
 
-function getImgsForDisplay() {
-    if (gFilter === 'all') {
+function getImgsForDisplay(filter = gFilter  ) {
+    if (filter === 'all') {
         return gImgs
     }
     var imgs = gImgs.filter(img => {
-        return img.keywords.includes(gFilter)
+        return img.keywords.includes(filter)
     });
-    gFilter = 'all'
+    filter = 'all'
     return imgs
 }
 

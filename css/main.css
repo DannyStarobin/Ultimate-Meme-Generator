@@ -300,8 +300,13 @@ section.filter-search-bar {
     font-size: 25px;
 }
 
-.sticker-drag{
+.sticker{
     border: none;
+    background-color: inherit;
+    font-size: 30px;
+    height: 50px;
+    width: 50px;
+
 
 }
 

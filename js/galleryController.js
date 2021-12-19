@@ -20,7 +20,7 @@ function onImageClick(id) {
     toggleGallery()
 }
 
-function toggleGallery(){
+function toggleGallery() {
     const elFilterBar = document.querySelector('.filter-search-bar')
     const elGallery = document.querySelector('.main-gallery')
     const elEditor = document.querySelector('.editor-grid-container')
@@ -29,13 +29,25 @@ function toggleGallery(){
     elEditor.classList.toggle("display-none")
 }
 
+function onFilterSearch(searchValue) {
+    var searchResults = getImgsForDisplay(searchValue)
+    if (!searchResults.length) {
+        return
+    } else
+    console.log('searchResults:', searchResults);
+    
+    gFilter = searchValue
+    
+        
+    renderGallery()
 
+}
 
 
 function onFilterClick(filter) {
     gFilter = filter
-    gKeywordSearchCountMap[filter]+=1
-    
+    gKeywordSearchCountMap[filter] += 1
+
     renderFilters('large')
     renderGallery()
 }
