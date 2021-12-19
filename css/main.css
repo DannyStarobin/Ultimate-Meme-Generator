@@ -4,17 +4,17 @@
 
 @font-face {
     font-family: inconsolata;
-    src: url(/css/fonts/Inconsolata/Inconsolata-Regular.ttf);
+    src: url(/fonts/Inconsolata/Inconsolata-Regular.ttf);
 }
 
 @font-face {
     font-family: play;
-    src: url(/css/fonts/playfair/PlayfairDisplay-Regular.ttf);
+    src: url(/fonts/playfair/PlayfairDisplay-Regular.ttf);
 }
 
 @font-face {
     font-family:impact;
-    src: url(/css/fonts/impact/impact.ttf);
+    src: url(/fonts/impact/impact.ttf);
 }
 
 
@@ -87,7 +87,7 @@ section.filter-search-bar {
 
 .filters {
     position: relative;
-    max-width: 300px;
+    max-width: 600px;
     margin: auto;
 
 }
@@ -298,6 +298,11 @@ section.filter-search-bar {
 .canvas-text {
     line-height: 50px;
     font-size: 25px;
+}
+
+.sticker-drag{
+    border: none;
+
 }
 
 footer {

@@ -34,12 +34,19 @@ function toggleGallery(){
 
 function onFilterClick(filter) {
     gFilter = filter
+    gKeywordSearchCountMap[filter]+=1
+    
+    renderFilters('large')
     renderGallery()
 }
 
+
 function onMoreCloseBtnsClick(size) {
     renderFilters(size)
+
 }
+
+
 
 function renderFilters(size) {
     const filters = getFiltersForDisplay(size)
