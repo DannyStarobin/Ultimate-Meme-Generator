@@ -7,25 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemeGen index</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/memeGen.css">
+   
 </head>
 
 <body onload="init()">
+
+    <div class="main-screen" onclick="toggleMenu()"></div>
 
     <header class="main-header main-layout flex align-center space-between">
         <div class="logo">MEMEGEN</div>
         <nav class="main-nav">
             <ul class="clean-list flex">
-                <li><a href="#">Gallery</a></li>
+                <li><a onclick="toggleGallery()" href="#">Gallery</a></li>
                 <li><a href="#">Memes</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </nav>
+        <button class="btn-menu" onclick="toggleMenu()">☰</button>
     </header>
 
-    <section class="filter-search-bar main-layout flex align-center space-between">
-
-        <form action="/action_page.php">
+    <section class="filter-search-bar main-layout ">
+        <form >
             <input class="filter-input" type="search" placeholder="Search.." name="search">
             <button class="filter-input-btn" type="submit">&#128269</button>
         </form>
@@ -45,8 +47,8 @@
 
         <div class="function-container">
             <div class="text-line-space">
-                <input class="text-input edit-btn" type="text" onfocus="this.value=''" placeholder="Text line" data-line="0"
-                    onchange="setLineTxt(this.value, this.data)">
+                <input class="text-input edit-btn" type="text" onfocus="this.value=''" placeholder="Text line"
+                    data-line="0" oninput="setLineTxt(this.value, this.data)">
             </div>
 
             <div class="text-line-function-btns">
@@ -65,13 +67,14 @@
                 <button class="edit-btn" onclick="onTextAlign('right')">⇛</button>
             </div>
             <div class="color-font-btn-container">
-                <select class="edit-btn edit-font-btn" name="shape" id="" onchange="setShape(value)">
-                    <option value="">Impact</option>
-                    <option value="line">Line</option>
-                    <option value="rectangle">Rectangle</option>
+                <select class="edit-btn edit-font-btn" name="shape" id="" onchange="onChangeFont(value)">
+                    <option value="Impact">Impact</option>
+                    <option value="Play">Play</option>
+                    <option value="Inconsolata">Inconsolata</option>
                 </select>
-                <button class="edit-btn" onclick="onTextAlign('left')">&#120120;</button>
+                <input class="edit-btn color-input-button" type="color" name="stroke-color" onchange="onChangeStrokeColor(value)">
                 <input class="edit-btn color-input-button" type="color" name="color" onchange="onChangeColor(value)">
+                
             </div>
             <div class="sticker-container">
                 <button class="sticker-drag1">xxx</button>
@@ -88,8 +91,8 @@
 
 
 
-    <footer> 
-       <h1 class="footer-txt">MEMEGEN</h1>
+    <footer class="main-layout">
+        <h1 class="footer-txt">MEMEGEN</h1>
     </footer>
 
 

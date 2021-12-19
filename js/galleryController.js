@@ -16,17 +16,21 @@ function renderGallery() {
 
 function onImageClick(id) {
     drawImgFromlocal(id)
-    loadEditor(id)
-    
+    loadMemeEditor(id)
+    toggleGallery()
+}
 
+function toggleGallery(){
     const elFilterBar = document.querySelector('.filter-search-bar')
     const elGallery = document.querySelector('.main-gallery')
     const elEditor = document.querySelector('.editor-grid-container')
-    elFilterBar.classList.add("display-none")
-    elGallery.classList.add("display-none")
-    elEditor.classList.remove("display-none")
-
+    elFilterBar.classList.toggle("display-none")
+    elGallery.classList.toggle("display-none")
+    elEditor.classList.toggle("display-none")
 }
+
+
+
 
 function onFilterClick(filter) {
     gFilter = filter
