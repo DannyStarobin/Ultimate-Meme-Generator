@@ -3,31 +3,44 @@ var gCtx;
 var gImg
 var gFocusedPrevColor
 var gFocusedLineNumber
+var gStartPos
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+
 
 function loadMemeEditor(id) {
     gCanvas = document.querySelector('#canvas');
     gCtx = gCanvas.getContext('2d');
     gMeme.selectedImgId = id
+    console.log('id:', id);
     
-    // window.addEventListener('resize', resizeCanvas)
-    // window.addEventListener('resize', () => {
-    //     console.log('resized')
-    //     resizeCanvas()
-    // })
+    // resizeCanvas() 
+    // drawImgFromlocal(id)
+    window.addEventListener('resize', () => {
+        console.log('resized')
+        resizeCanvas()
+        renderMeme()
+        // addListeners()
+    })
 }
 
 function renderMeme() {
-   var meme = getMeme()
+    var meme = getMeme()
     var lines = meme.lines
-    const txtPosFromLeft = gCanvas.width/2
+    const txtPosFromLeft = gCanvas.width / 2
     clearCanvas()
-   
-    gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height)
+    drwaImage()
     lines.forEach((line) => {
         drawRect(20, line.txtBoxPosFromTop, line.rectColor)
         drawText(line.txt, txtPosFromLeft, line.txtPosFromTop, line.size, line.align, line.color, line.strokeColor, line.font)
     })
 }
+
+// function renderSticker() {
+//     const sticker = getsticker()
+//     const { pos, size } = sticker
+//    (pos.x, pos.y, size)
+//    gCtx.drawImage(, 0, 0, gCanvas.width, gCanvas.height)
+// }
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
@@ -35,60 +48,42 @@ function resizeCanvas() {
     gCanvas.height = elContainer.offsetHeight
 }
 
-function onChangeFont(font){
-    gMeme.lines[gMeme.selectedLineIdx].font = `${font}`
-    renderMeme()
-}
-
-function onChangeStrokeColor(strokeColor){
-    gMeme.lines[gMeme.selectedLineIdx].strokeColor = `${strokeColor}`
-    renderMeme()
-}
-
-function onChangeColor(txtColor) {
-    gMeme.lines[gMeme.selectedLineIdx].color = `${txtColor}`
-    renderMeme()
-}
-
-function onTextAlign(align) {
-    console.log('align:', align);
-    gMeme.lines[gMeme.selectedLineIdx].align = `${align}`
-
-    if (align === 'right') gMeme.lines[gMeme.selectedLineIdx].txtPosFromLeft = 520
-    if (align === 'left') gMeme.lines[gMeme.selectedLineIdx].txtPosFromLeft = 30
-    if (align === 'center') gMeme.lines[gMeme.selectedLineIdx].txtPosFromLeft = 275
-
-    renderMeme()
-}
-
-function onFontSmall() {
-    gMeme.lines[gMeme.selectedLineIdx].size -= 1
-    renderMeme()
-}
-
-function onFontLarge() {
-    if (gMeme.lines[gMeme.selectedLineIdx].size === 48) return
-    gMeme.lines[gMeme.selectedLineIdx].size += 1
-
-    renderMeme()
-}
-
-function onMoveDown() {
-
-    if (gMeme.lines[gMeme.selectedLineIdx].isFocused === true) {
-        gMeme.lines[gMeme.selectedLineIdx].txtBoxPosFromTop += 1
-        gMeme.lines[gMeme.selectedLineIdx].txtPosFromTop += 1
-        renderMeme()
+function drawImgFromlocal(id) {
+    gImg = new Image()
+    gImg.src = `img/${id}.jpg`;
+    gImg.onload = () => {
+        drwaImage()
+        drawRect(20, 10)
     }
 }
 
-function onMoveUp() {
+function drwaImage() {
+    gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height)
+}
 
-    if (gMeme.lines[gMeme.selectedLineIdx].isFocused === true) {
-        gMeme.lines[gMeme.selectedLineIdx].txtBoxPosFromTop -= 1
-        gMeme.lines[gMeme.selectedLineIdx].txtPosFromTop -= 1
-        renderMeme()
-    }
+function drawRect(x, y, color = '#1b1b1b') {
+    gCtx.beginPath();
+    gCtx.rect(x, y, gCanvas.width - 40, 50);
+    // gCtx.fillStyle = 'blue';
+    // gCtx.fillRect(x, y, 150, 150);
+    gCtx.strokeStyle = color;
+    gCtx.stroke();
+    gCtx.closePath();
+
+}
+
+function drawText(txt, x, y, size, align, color, strokeColor, font) {
+
+    // gCtx.font = '48px serif';
+    // gCtx.fillText(txt, x, y);
+    gCtx.textBaseline = 'middle';
+    gCtx.textAlign = `${align}`;
+    // gCtx.lineWidth = 2;
+    gCtx.strokeStyle = `${strokeColor}`;
+    gCtx.font = `${size}px ${font}`;
+    gCtx.fillStyle = `${color}`;
+    gCtx.fillText(txt, x, y);
+    gCtx.strokeText(txt, x, y);
 }
 
 function onDeleteItem() {
@@ -100,19 +95,11 @@ function onDeleteItem() {
     } else if (!gMeme.lines[gMeme.selectedLineIdx].isFocused && gMeme.lines.length > 1) {
         gFocusedLineNumber -= 1
     }
-
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    document.querySelector('.text-input').setAttribute("data-line", 0)
+    document.querySelector('.meme-text-input').setAttribute("data-line", 0)
     gMeme.selectedLineIdx = 0
 
     renderMeme()
-}
-
-function unFocus() {
-    if (gFocusedLineNumber >= 0 && gMeme.lines[gFocusedLineNumber].isFocused) {
-        gMeme.lines[gFocusedLineNumber].isFocused = false
-        gMeme.lines[gFocusedLineNumber].rectColor = gFocusedPrevColor
-    }
 }
 
 function onChangeLine() {
@@ -127,7 +114,7 @@ function onChangeLine() {
         nextLineNumber = currLineNumber + 1
     }
 
-    document.querySelector('.text-input').setAttribute("data-line", nextLineNumber)
+    document.querySelector('.meme-text-input').setAttribute("data-line", nextLineNumber)
     gFocusedPrevColor = gMeme.lines[nextLineNumber].rectColor
     gMeme.lines[nextLineNumber].isFocused = true
     gMeme.lines[nextLineNumber].rectColor = 'yellow'
@@ -142,54 +129,73 @@ function onAddLine() {
     unFocus()
     const newLineNumber = gMeme.lines.length - 1
     gMeme.selectedLineIdx = newLineNumber
-    document.querySelector('.text-input').setAttribute("data-line", newLineNumber)
+    document.querySelector('.meme-text-input').setAttribute("data-line", newLineNumber)
     renderMeme()
-}
-
-function setLineTxt(txt) {
-    const lineNumber = gMeme.selectedLineIdx
-    gMeme.lines[lineNumber].txt = txt
-    renderMeme()
-}
-
-function drawImgFromlocal(id) {
-    gImg = new Image()
-    gImg.src = `img/${id}.jpg`;
-    gImg.onload = () => {
-        gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend 
-        resizeCanvas()
-        drawRect(20,10)
-        renderMeme()
-        
-    }
-}
-
-function drawRect(x,y, color = '#1b1b1b') {
-    gCtx.beginPath();
-    gCtx.rect(x, y, gCanvas.width - 40, 50);
-    // gCtx.fillStyle = 'blue';
-    // gCtx.fillRect(x, y, 150, 150);
-    gCtx.strokeStyle = color;
-    gCtx.stroke();
-    gCtx.closePath();
-
-}
-
-function drawText(txt, x, y, size, align, color, strokeColor, font ) {
-
-    // gCtx.font = '48px serif';
-    // gCtx.fillText(txt, x, y);
-    gCtx.textBaseline = 'middle';
-    gCtx.textAlign = `${align}`;
-    // gCtx.lineWidth = 2;
-    gCtx.strokeStyle = `${strokeColor}`;
-    gCtx.font = `${size}px ${font}`;
-    gCtx.fillStyle = `${color}`;
-    gCtx.fillText(txt, x, y);
-    gCtx.strokeText(txt, x, y);
 }
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
+
+// function addListeners() {
+//     addMouseListeners()
+//     addTouchListeners()
+// }
+
+// function addMouseListeners() {
+//     gCanvas.addEventListener('mousemove', onMove)
+//     gCanvas.addEventListener('mousedown', onDown)
+//     gCanvas.addEventListener('mouseup', onUp)
+// }
+
+// function addTouchListeners() {
+//     gCanvas.addEventListener('touchmove', onMove)
+//     gCanvas.addEventListener('touchstart', onDown)
+//     gCanvas.addEventListener('touchend', onUp)
+// }
+
+// function onDown(ev) {
+//     const pos = getEvPos(ev)
+//     if (!setStickerDrag(pos)) return
+//     setStickerDrag(true)
+//     gStartPos = pos
+//     document.body.style.cursor = 'grabbing'
+
+// }
+
+// function onMove(ev) {
+//     const sticker = getSticker();
+//     if (!circle.isDrag) return
+//     const pos = getEvPos(ev)
+//     const dx = pos.x - gStartPos.x
+//     const dy = pos.y - gStartPos.y
+//     moveSticker(dx, dy)
+//     gStartPos = pos
+//     renderMeme()
+
+// }
+
+// function onUp() {
+//     setStickerDrag(false)
+//     document.body.style.cursor = 'grab'
+// }
+
+// function getEvPos(ev) {
+//     var pos = {
+//         x: ev.offsetX,
+//         y: ev.offsetY
+//     }
+//     console.log('pos:', pos);
+
+//     if (gTouchEvs.includes(ev.type)) {
+//         ev.preventDefault()
+//         ev = ev.changedTouches[0]
+//         pos = {
+//             x: ev.pageX - ev.target.offsetLeft,
+//             y: ev.pageY - ev.target.offsetTop
+//         }
+//     }
+//     return pos
+// }
+
 

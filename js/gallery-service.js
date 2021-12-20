@@ -1,5 +1,6 @@
 'use strict'
 var gFilter = 'all'
+var gFilterBarStatus = 'close'
 
 var gKeywordSearchCountMap = {
     'Funny': 1, 'Cat': 4, 'Baby': 2,
@@ -18,7 +19,7 @@ var gImgs = [
     { id: 6, url: 'img/6.jpg', keywords: ['Funny', 'Man'] },
     { id: 7, url: 'img/7.jpg', keywords: ['Funny', 'Baby'] },
     { id: 8, url: 'img/8.jpg', keywords: ['Funny', 'Man'] },
-    { id: 9, url: 'img/9.jpg', keywords: ['Funny', 'Baby', 'Laughing'] },
+    { id: 9, url: 'img/9.jpg', keywords: ['Funny', 'Baby', 'Laughing'] }, 
     { id: 10, url: 'img/10.jpg', keywords: ['Funny', 'Politicians', 'Man', 'Laughing'] },
     { id: 11, url: 'img/11.jpg', keywords: ['Funny', 'Love', 'Hate', 'Man'] },
     { id: 12, url: 'img/12.jpg', keywords: ['Funny', 'Celebrities', 'Man', 'Israeli', 'You'] },
@@ -30,8 +31,12 @@ var gImgs = [
     { id: 18, url: 'img/18.jpg', keywords: ['Funny', 'Cartoon'] },
 ];
 
+function onImageClick(id) {
+    loadMemeEditor(id)
+    toggleGallery()
+}
 
-function getImgsForDisplay(filter = gFilter  ) {
+function getImgsForDisplay(filter = gFilter) {
     if (filter === 'all') {
         return gImgs
     }
@@ -43,13 +48,36 @@ function getImgsForDisplay(filter = gFilter  ) {
 }
 
 
-function getFiltersForDisplay(filterSize) {
+function getFiltersForDisplay(filterBarStatus) {
     var { Funny, Cat, Baby, Politicians } = gKeywordSearchCountMap
     
-    if (filterSize === 'large') {
+    if (filterBarStatus === 'open') {
         return gKeywordSearchCountMap
     } else {
         return { Funny, Cat, Baby, Politicians }
     }
+}
 
+function onFilterClick(filter) {
+    gFilter = filter
+    gKeywordSearchCountMap[filter] += 1
+
+    renderFilters(gFilterBarStatus)
+    renderGallery()
+}
+
+function onOpenCloseFilterBar(filterBarStatus) {
+    gFilterBarStatus=filterBarStatus
+    renderFilters(gFilterBarStatus) 
+}
+
+function onFilterSearch(searchValue) {
+   
+    var searchResults = getImgsForDisplay(searchValue)
+    if (!searchResults.length) {
+        renderGallery('all')
+        alert('Sorry no results')
+    } else
+    renderGallery(searchValue)
+    console.log('searchResults:', searchResults);
 }

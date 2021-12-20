@@ -1,5 +1,8 @@
 'use strict'
-
+function init(){
+    renderGallery()
+    renderFilters(gFilterBarStatus)
+}
 
 
 function renderGallery() {
@@ -11,7 +14,6 @@ function renderGallery() {
         `
     })
     document.querySelector('.gallery-grid-container').innerHTML = strHtmls.join('')
-
 }
 
 function onImageClick(id) {
@@ -23,45 +25,14 @@ function onImageClick(id) {
 function toggleGallery() {
     const elFilterBar = document.querySelector('.filter-search-bar')
     const elGallery = document.querySelector('.main-gallery')
-    const elEditor = document.querySelector('.editor-grid-container')
+    const elEditor = document.querySelector('.meme-page-container')
     elFilterBar.classList.toggle("display-none")
     elGallery.classList.toggle("display-none")
     elEditor.classList.toggle("display-none")
 }
 
-function onFilterSearch(searchValue) {
-    var searchResults = getImgsForDisplay(searchValue)
-    if (!searchResults.length) {
-        return
-    } else
-    console.log('searchResults:', searchResults);
-    
-    gFilter = searchValue
-    
-        
-    renderGallery()
-
-}
-
-
-function onFilterClick(filter) {
-    gFilter = filter
-    gKeywordSearchCountMap[filter] += 1
-
-    renderFilters('large')
-    renderGallery()
-}
-
-
-function onMoreCloseBtnsClick(size) {
-    renderFilters(size)
-
-}
-
-
-
-function renderFilters(size) {
-    const filters = getFiltersForDisplay(size)
+function renderFilters(filterBarStatus) {
+    const filters = getFiltersForDisplay(filterBarStatus)
     const elFilters = document.querySelector('.filters')
     const filtersArr = Object.entries(filters)
     var strHtmls
@@ -72,12 +43,15 @@ function renderFilters(size) {
     });
 
     elFilters.innerHTML = strHtmls.join('')
-    if (size === 'small') {
-        elFilters.innerHTML += `<button class="filter-btn more-filter-btn" onclick="onMoreCloseBtnsClick('large')">more...</button>`
+    if (filterBarStatus === 'close') {
+        elFilters.innerHTML += `<button class="filter-btn more-filter-btn" onclick="onOpenCloseFilterBar('open')">more...</button>`
     } else {
-        elFilters.innerHTML += `<button class="filter-btn close-filter-btn" onclick="onMoreCloseBtnsClick('small')">...close X</button>`
+        elFilters.innerHTML += `<button class="filter-btn close-filter-btn" onclick="onOpenCloseFilterBar('close')">...close X</button>`
     }
 }
 
+function onCloseModal(){
+  document.querySelector('.share-on-facebook-modal').style.display ='none'  
+}
 
 

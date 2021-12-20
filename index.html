@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemeGen index</title>
     <link rel="stylesheet" href="css/main.css">
-   
+
 </head>
 
 <body onload="init()">
@@ -27,8 +27,9 @@
     </header>
 
     <section class="filter-search-bar main-layout ">
-        <form >
-            <input class="filter-input" type="search" onchange="onFilterSearch(value)" placeholder="Search.." name="search">
+        <form>
+            <input class="filter-input" type="search" onchange="onFilterSearch(value)" placeholder="Search.."
+                name="search">
             <!-- <button class="filter-input-btn" type="submit">&#128269</button> -->
         </form>
         <div class="filters">
@@ -40,15 +41,17 @@
     </main>
 
 
-    <div class="editor-grid-container display-none main-layout">
+
+    <div class="meme-page-container main-layout flex display-none">
         <div class="canvas-container">
             <canvas id="canvas" height="550" width="550"></canvas>
         </div>
 
-        <div class="function-container">
+        <div class="meme-function-grid-container">
+
             <div class="text-line-space">
-                <input class="text-input edit-btn" type="text" onfocus="this.value=''" placeholder="Text line"
-                    data-line="0" oninput="setLineTxt(this.value, this.data)">
+                <input class="meme-text-input" type="text" onfocus="this.value=''" placeholder="Text line" data-line="0"
+                    oninput="setLineTxt(this.value, this.data)">
             </div>
 
             <div class="text-line-function-btns">
@@ -72,22 +75,35 @@
                     <option value="Play">Play</option>
                     <option value="Inconsolata">Inconsolata</option>
                 </select>
-                <input class="edit-btn color-input-button" type="color" name="stroke-color" onchange="onChangeStrokeColor(value)">
+                <input class="edit-btn color-input-button" type="color" name="stroke-color"
+                    onchange="onChangeStrokeColor(value)">
                 <input class="edit-btn color-input-button" type="color" name="color" onchange="onChangeColor(value)">
-                
+
             </div>
             <div class="sticker-container">
 
 
-                <button class="sticker sticker-drag1">😈</button>
-                <button class="sticker sticker-drag2">👽</button>
-                <button class="sticker sticker-drag3">🦔</button>
-                <button class="sticker sticker-drag4">🐥</button>
+                <button class="sticker sticker-drag1"><img class="sticker" src="imgStickers/1.png"
+                        onclick="loadSticker(1,png)"></button>
+                <button class="sticker sticker-drag2"><img class="sticker" src="imgStickers/2.png"
+                        onclick="loadSticker(2,png)"></button>
+                <button class="sticker sticker-drag3"><img class="sticker" src="imgStickers/3.png"
+                        onclick="loadSticker(3,png)"></button>
+
             </div>
             <div class="upload-share-btns">
-                <button class="share-btn">share</button>
-                <!-- <button class="download-btn">download</button> -->
+                <button class="share-btn" onclick="uploadImg()">share</button>
+                <button class="download-btn"><a href="#" onclick="downloadCanvas(this)"
+                        download="myphoto">Download</a></button>
             </div>
+
+            <div class="share-on-facebook-modal">
+                <button class="close-modal-btn" onclick="onCloseModal()">X</button>
+                <p class="user-msg"></p>
+                <h2>Share it on facebook!</h2>
+                <div class="share-container"></div>
+            </div>
+
         </div>
     </div>
 
@@ -98,6 +114,7 @@
     </footer>
 
 
+    <script src="js/upload-download-service.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/galleryController.js"></script>
